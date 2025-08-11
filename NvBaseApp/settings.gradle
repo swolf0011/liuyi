@@ -1,0 +1,31 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "NvBaseApp"
+include ':app'
+include ':lib_base'
+include ':lib_framework'
+include ':lib_https'
+include ':lib_util'
+include ':biz_util'
+include ':biz_res'
+include ':biz_https'
+include ':biz_data'
+include ':biz_db'
+include ':lib_arouter'
+include ':module_home'
+include ':module_user'
+include ':module_pay'
+include ':lib_common'
+include ':module_test'

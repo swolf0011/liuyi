@@ -1,0 +1,58 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+//arouter----begin---
+apply plugin: 'kotlin-kapt'     //注解解析的插件
+def ext = rootProject.ext
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+//arouter----end---
+android {
+    //arouter----begin---
+    compileSdk ext.androidConfig.compileSdk
+
+    defaultConfig {
+        minSdk ext.androidConfig.minSdk
+        targetSdk ext.androidConfig.targetSdk
+    //arouter----end---
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    //arouter----begin---
+    resourcePrefix "home_"
+    //arouter----end---
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //arouter----begin---
+    implementation project(path: ':lib_arouter')
+    kapt ext.dependenciesConfig.arouterCompiler
+    //arouter----end---
+}
+
